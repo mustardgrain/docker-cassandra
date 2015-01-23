@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+if [ "$OPS_IP" != "" ] ; then
+	if [ ! -f $AGENT_HOME/.agentconfig ]; then
+		echo "stomp_interface: $OPS_IP" >> $AGENT_HOME/conf/address.yaml
+
+		touch $AGENT_HOME/.agentconfig
+	fi
+
+    sleep 30
+	$AGENT_HOME/bin/datastax-agent -f
+else
+	tail -f /dev/null
+fi

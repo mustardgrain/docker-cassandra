@@ -1,0 +1,30 @@
+#!/bin/bash -e
+
+ADDR=$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
+
+# Check if a seed was provided
+SEED=${SEED:=$ADDR}
+
+if [ ! -f $CASSANDRA_HOME/.cassconfig ]; then
+    ENV_FILE=$CASSANDRA_HOME/conf/cassandra-env.sh
+    CONF_FILE=$CASSANDRA_HOME/conf/cassandra.yaml
+
+    # Add heap settings
+    echo MAX_HEAP_SIZE="4G" >> $ENV_FILE
+    echo HEAP_NEWSIZE="800M" >> $ENV_FILE
+
+    # Add broadcast IPs
+    echo "listen_address: $ADDR" >> $CONF_FILE
+    echo "broadcast_rpc_address: $ADDR" >> $CONF_FILE
+    echo "rpc_address: 0.0.0.0" >> $CONF_FILE
+
+    # Add seed info
+    echo "seed_provider:" >> $CONF_FILE
+    echo "  - class_name: org.apache.cassandra.locator.SimpleSeedProvider" >> $CONF_FILE
+    echo "    parameters:" >> $CONF_FILE
+    echo "      - seeds: \"$SEED\"" >> $CONF_FILE
+
+    touch $CASSANDRA_HOME/.cassconfig
+fi
+
+$CASSANDRA_HOME/bin/cassandra -f
