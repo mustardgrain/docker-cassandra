@@ -7,7 +7,7 @@ if [ "$OPS_IP" != "" ] ; then
 		touch $AGENT_HOME/.agentconfig
 	fi
 
-    sleep 30
+    sleep 60
 	$AGENT_HOME/bin/datastax-agent -f
 else
 	tail -f /dev/null
