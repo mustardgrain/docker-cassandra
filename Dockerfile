@@ -15,6 +15,13 @@ ENV AGENT_HOME /opt/datastax-agent-$AGENT_VERSION
 RUN cd /opt && /usr/bin/curl -L -s $CASSANDRA_URL | tar xz
 RUN cd /opt && /usr/bin/curl -L -s $AGENT_URL | tar xz
 
+RUN \
+  apt-get update && apt-get install -y \
+    python-dev \
+    python-setuptools \
+    sysstat && \
+  easy_install pip
+
 COPY . /src
 
 RUN cp /src/cassandra.yaml $CASSANDRA_HOME/conf
