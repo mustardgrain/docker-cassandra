@@ -2,8 +2,10 @@
 
 ADDR=$(/sbin/ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
 
-# Check if a seed was provided
+# Check if overrides were provided
 SEED=${SEED:=$ADDR}
+DATA_DIR=${DATA_DIR:=$CASSANDRA_HOME/data}
+COMMIT_LOG_DIR=${COMMIT_LOG_DIR:=$CASSANDRA_HOME/commitlog}
 
 if [ ! -f $CASSANDRA_HOME/.cassconfig ]; then
     ENV_FILE=$CASSANDRA_HOME/conf/cassandra-env.sh
@@ -23,6 +25,11 @@ if [ ! -f $CASSANDRA_HOME/.cassconfig ]; then
     echo "  - class_name: org.apache.cassandra.locator.SimpleSeedProvider" >> $CONF_FILE
     echo "    parameters:" >> $CONF_FILE
     echo "      - seeds: \"$SEED\"" >> $CONF_FILE
+
+    # Add directory information
+    echo "data_file_directories:" >> $CONF_FILE
+    echo "  - $DATA_DIR" >> $CONF_FILE
+    echo "commitlog_directory: $COMMIT_LOG_DIR" >> $CONF_FILE
 
     touch $CASSANDRA_HOME/.cassconfig
 fi

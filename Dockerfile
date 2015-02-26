@@ -4,11 +4,11 @@ MAINTAINER Kirk True <kirk@mustardgrain.com>
 
 CMD ["/sbin/my_init"]
 
-ENV CASSANDRA_VERSION 2.1.2
+ENV CASSANDRA_VERSION 2.1.3
 ENV CASSANDRA_URL http://www.us.apache.org/dist/cassandra/$CASSANDRA_VERSION/apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz
 ENV CASSANDRA_HOME /opt/apache-cassandra-$CASSANDRA_VERSION
 
-ENV AGENT_VERSION 5.0.2
+ENV AGENT_VERSION 5.1.0
 ENV AGENT_URL http://downloads.datastax.com/community/datastax-agent-$AGENT_VERSION.tar.gz
 ENV AGENT_HOME /opt/datastax-agent-$AGENT_VERSION
 

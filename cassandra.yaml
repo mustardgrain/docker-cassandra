@@ -9,9 +9,6 @@ authenticator: AllowAllAuthenticator
 authorizer: AllowAllAuthorizer
 permissions_validity_in_ms: 2000
 partitioner: org.apache.cassandra.dht.Murmur3Partitioner
-data_file_directories:
-  - /opt/cassandra/data
-commitlog_directory: /opt/cassandra/commitlog
 disk_failure_policy: stop
 commit_failure_policy: stop
 key_cache_size_in_mb:
