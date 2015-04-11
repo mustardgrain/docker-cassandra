@@ -4,7 +4,7 @@ MAINTAINER Kirk True <kirk@mustardgrain.com>
 
 CMD ["/sbin/my_init"]
 
-ENV CASSANDRA_VERSION 2.1.3
+ENV CASSANDRA_VERSION 2.1.4
 ENV CASSANDRA_URL http://www.us.apache.org/dist/cassandra/$CASSANDRA_VERSION/apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz
 ENV CASSANDRA_HOME /opt/apache-cassandra-$CASSANDRA_VERSION
 
