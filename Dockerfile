@@ -4,11 +4,11 @@ MAINTAINER Kirk True <kirk@mustardgrain.com>
 
 CMD ["/sbin/my_init"]
 
-ENV CASSANDRA_VERSION 2.2.0
+ENV CASSANDRA_VERSION 3.2.1
 ENV CASSANDRA_URL http://www.us.apache.org/dist/cassandra/$CASSANDRA_VERSION/apache-cassandra-$CASSANDRA_VERSION-bin.tar.gz
 ENV CASSANDRA_HOME /opt/apache-cassandra-$CASSANDRA_VERSION
 
-ENV AGENT_VERSION 5.2.0
+ENV AGENT_VERSION 5.2.4
 ENV AGENT_URL http://downloads.datastax.com/community/datastax-agent-$AGENT_VERSION.tar.gz
 ENV AGENT_HOME /opt/datastax-agent-$AGENT_VERSION
 
@@ -32,6 +32,6 @@ RUN	\
 
 WORKDIR $CASSANDRA_HOME
 
-EXPOSE 7000 7001 7199 9042 9160 
+EXPOSE 7000 7001 7199 9042 9160
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
