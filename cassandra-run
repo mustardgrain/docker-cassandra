@@ -34,4 +34,4 @@ if [ ! -f $CASSANDRA_HOME/.cassconfig ]; then
     touch $CASSANDRA_HOME/.cassconfig
 fi
 
-$CASSANDRA_HOME/bin/cassandra -f
+$CASSANDRA_HOME/bin/cassandra -f -R
