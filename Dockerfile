@@ -10,6 +10,13 @@ ENV CASSANDRA_HOME /opt/apache-cassandra-$CASSANDRA_VERSION
 
 RUN cd /opt && /usr/bin/curl -L -s $CASSANDRA_URL | tar xz
 
+RUN \		
+  apt-get update && apt-get install -y \		
+    python-dev \		
+    python-setuptools \		
+    sysstat && \		
+  easy_install pip
+
 COPY . /src
 
 RUN cp /src/cassandra.yaml $CASSANDRA_HOME/conf
